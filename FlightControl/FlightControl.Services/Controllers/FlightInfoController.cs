@@ -2,6 +2,7 @@
 {
     using System.Web.Http;
 
+    using FlightControl.Services.Properties;
     using FlightControl.Services.Service;
     using FlightControl.Services.Service.Data;
 
@@ -9,7 +10,7 @@
     {
         public FlightInfo Get(string token)
         {
-            var proxy = new FlightControlProxy("http://challenge.hacktivate.me:3000");
+            var proxy = new FlightControlProxy(Settings.Default.BaseUrl);
             var flightInfo = proxy.GetResult(token);
 
             return flightInfo;
