@@ -135,13 +135,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\FlightControlController.cs" />
+    <Compile Include="Code\WebRequestExtensions.cs" />
+    <Compile Include="Controllers\FlightInfoController.cs" />
+    <Compile Include="Controllers\NewSessionController.cs" />
+    <Compile Include="Service\Data\Boundary.cs" />
+    <Compile Include="Service\FlightControlProxy.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Data\SessionInfo.cs" />
+    <Compile Include="Service\Data\FlightInfo.cs" />
+    <Compile Include="Service\Data\Plane.cs" />
+    <Compile Include="Service\Data\Point.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
