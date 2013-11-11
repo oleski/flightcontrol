@@ -4,26 +4,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
+    using Properties;
     using Service;
     using Service.Data;
 
     public class FlightControlTower
     {
-        private FlightControlProxy FlightControlProxy { get; set; }
-
-        private string Token { get; set; }
-
-        private Boundary Boundary { get; set; }
-
         private List<Plane> Planes { get; set; } 
 
         public FlightControlTower()
         {
-            FlightControlProxy =  new FlightControlProxy("http://challenge.hacktivate.me:3000");
-            Token = FlightControlProxy.GetNewSession().Token;
-            var info = FlightControlProxy.GetResult(Token);
-            Boundary = info.Boundary;
-            Planes = info.Planes;
+            Planes = FlightContext.GetPlanes();
         }
 
         public void Run()
@@ -36,7 +27,7 @@
 
         private void UpdatePlanes(object sender, EventArgs e)
         {
-            var newPlanes = FlightControlProxy.GetResult(Token).Planes;
+            var newPlanes = FlightContext.GetPlanes();
             foreach (var plane in newPlanes)
             {
                 var existingPlane = Planes.SingleOrDefault(x => x.Id == plane.Id);

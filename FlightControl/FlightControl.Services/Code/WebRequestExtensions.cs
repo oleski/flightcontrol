@@ -10,7 +10,7 @@ namespace FlightControl.Services.Code
 
     public static class WebRequestExtensions
     {
-        public static T GerRequestResult<T>(this Uri requestUri)
+        public static T GetRequestResult<T>(this Uri requestUri)
         {
             var request = WebRequest.Create(requestUri);
             var response = request.GetResponse();

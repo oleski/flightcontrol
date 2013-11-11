@@ -5,8 +5,6 @@
     [DataContract]
     public class Plane
     {
-        private readonly FlightControlProxy _proxy;
-
         [DataMember(Name = "type")]
         public string Type { get; set; }
 
@@ -36,15 +34,6 @@
 
         [DataMember(Name = "penalty")]
         public int Penalty { get; set; }
-
-        public Plane(FlightControlProxy proxy)
-        {
-            _proxy = proxy;
-        }
-
-        public Plane()
-        {
-        }
 
         public void UpdateProperties(string type, Point position, double? rotation, int? id, string name,
             string graphic, int? speed, int? fuel, int? points, int? penalty)

@@ -145,6 +145,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service\Data\Boundary.cs" />
+    <Compile Include="Service\FlightContext.cs" />
     <Compile Include="Service\FlightControlProxy.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
