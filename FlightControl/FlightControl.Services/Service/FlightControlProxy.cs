@@ -1,9 +1,8 @@
 ﻿namespace FlightControl.Services.Service
 {
     using System;
-
-    using FlightControl.Services.Code;
-    using FlightControl.Services.Service.Data;
+    using Code;
+    using Data;
 
     public class FlightControlProxy
     {

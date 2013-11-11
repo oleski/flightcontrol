@@ -2,8 +2,8 @@
 {
     using System.Web.Http;
 
-    using FlightControl.Services.Service;
-    using FlightControl.Services.Service.Data;
+    using Service;
+    using Service.Data;
 
     public class FlightInfoController : ApiController
     {

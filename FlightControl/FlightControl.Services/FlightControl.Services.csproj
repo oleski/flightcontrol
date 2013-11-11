@@ -138,6 +138,7 @@
     <Compile Include="Code\WebRequestExtensions.cs" />
     <Compile Include="Controllers\FlightInfoController.cs" />
     <Compile Include="Controllers\NewSessionController.cs" />
+    <Compile Include="FlightControl\FlightControlTower.cs" />
     <Compile Include="Service\Data\Boundary.cs" />
     <Compile Include="Service\FlightControlProxy.cs" />
     <Compile Include="Controllers\HomeController.cs" />

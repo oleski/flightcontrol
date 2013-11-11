@@ -14,5 +14,10 @@ namespace FlightControl.Services.Controllers
 
             return View();
         }
+
+        public ActionResult Run()
+        {
+            
+        }
     }
 }
