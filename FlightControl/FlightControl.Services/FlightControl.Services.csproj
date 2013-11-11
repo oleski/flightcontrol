@@ -139,6 +139,11 @@
     <Compile Include="Controllers\FlightInfoController.cs" />
     <Compile Include="Controllers\NewSessionController.cs" />
     <Compile Include="FlightControl\FlightControlTower.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Service\Data\Boundary.cs" />
     <Compile Include="Service\FlightControlProxy.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,6 +177,10 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

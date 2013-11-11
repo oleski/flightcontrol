@@ -9,7 +9,7 @@ namespace FlightControl.Services.Controllers
     {
         public SessionInfo Get()
         {
-            var proxy = new FlightControlProxy("http://challenge.hacktivate.me:3000");
+            var proxy = new FlightControlProxy(Settings.Default.BaseUrl);
             var session = proxy.GetNewSession();
 
             return session;
