@@ -2,6 +2,7 @@
 
 namespace FlightControl.Services.Controllers
 {
+    using Properties;
     using Service;
     using Service.Data;
 
