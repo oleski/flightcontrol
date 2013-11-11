@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace FlightControl.Services.Controllers
 {
+    using System.Net;
+    using FlightControl;
+
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -17,7 +20,8 @@ namespace FlightControl.Services.Controllers
 
         public ActionResult Run()
         {
-            
+            new FlightControlTower().Run();
+            return new HttpStatusCodeResult(HttpStatusCode.Accepted);
         }
     }
 }

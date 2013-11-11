@@ -44,7 +44,17 @@
                     Planes.Add(plane);
                 else
                 {
-                    
+                    existingPlane.UpdateProperties(
+                        plane.Type, 
+                        plane.Position, 
+                        plane.Rotation, 
+                        plane.Id, 
+                        plane.Name, 
+                        plane.Graphic, 
+                        plane.Speed, 
+                        plane.Fuel, 
+                        plane.Points, 
+                        plane.Penalty);
                 }
             }
         }
