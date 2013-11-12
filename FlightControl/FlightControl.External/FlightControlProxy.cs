@@ -40,7 +40,7 @@
         {
             using (var client = new WebClient())
             {
-                client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var data = new PlaneInstruction
                 {
                     Directions = new List<Direction>{
