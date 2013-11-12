@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightControl.Services", "FlightControl.Services\FlightControl.Services.csproj", "{CED0E38B-C43C-4EA4-8436-4A0174A2F775}"
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightControl.WebApi", "FlightControl.WebApi\FlightControl.WebApi.csproj", "{CED0E38B-C43C-4EA4-8436-4A0174A2F775}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightControl.External", "FlightControl.External\FlightControl.External.csproj", "{741CE25B-3447-4B7F-834F-269789A32B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightControl.Core", "FlightControl.Core\FlightControl.Core.csproj", "{F6587755-4AFB-4DB8-879E-7AED22346B60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightControl.Model", "FlightControl.Model\FlightControl.Model.csproj", "{BB63F635-B334-449E-920F-68D1F9C4C41B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightControl.Tests", "FlightControl.Tests\FlightControl.Tests.csproj", "{4B9632D8-347B-4D4D-BD40-ECB5C99F055E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,22 @@ Global
 		{CED0E38B-C43C-4EA4-8436-4A0174A2F775}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CED0E38B-C43C-4EA4-8436-4A0174A2F775}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CED0E38B-C43C-4EA4-8436-4A0174A2F775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741CE25B-3447-4B7F-834F-269789A32B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741CE25B-3447-4B7F-834F-269789A32B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741CE25B-3447-4B7F-834F-269789A32B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741CE25B-3447-4B7F-834F-269789A32B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6587755-4AFB-4DB8-879E-7AED22346B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6587755-4AFB-4DB8-879E-7AED22346B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6587755-4AFB-4DB8-879E-7AED22346B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6587755-4AFB-4DB8-879E-7AED22346B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB63F635-B334-449E-920F-68D1F9C4C41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB63F635-B334-449E-920F-68D1F9C4C41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB63F635-B334-449E-920F-68D1F9C4C41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB63F635-B334-449E-920F-68D1F9C4C41B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B9632D8-347B-4D4D-BD40-ECB5C99F055E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B9632D8-347B-4D4D-BD40-ECB5C99F055E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B9632D8-347B-4D4D-BD40-ECB5C99F055E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B9632D8-347B-4D4D-BD40-ECB5C99F055E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
