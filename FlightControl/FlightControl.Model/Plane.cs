@@ -1,6 +1,7 @@
 ﻿namespace FlightControl.Model
 {
     using System.Runtime.Serialization;
+    using System.Collections.Generic;
 
     [DataContract]
     public class Plane
@@ -42,6 +43,9 @@
 
         [DataMember(Name = "waypoint")]
         public Point Waypoint { get; set; }
+
+        [DataMember(Name = "upcoming_waypoints")]
+        public List<Point> RemainingWaypoints { get; set; }
         
         [DataMember(Name = "name")]
         public string Name { get; set; }
