@@ -1,6 +1,7 @@
 ﻿namespace FlightControl.External
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Runtime.Serialization.Json;
     using FlightControl.Model;
@@ -42,10 +43,12 @@
                 client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                 var data = new PlaneInstruction
                 {
-                    Directions = new Direction
-                    {
-                        PlaneId = id,
-                        Waypoint = waypoint
+                    Directions = new List<Direction>{
+                        new Direction
+                            {
+                                PlaneId = id,
+                                Waypoint = waypoint
+                            }
                     },
                     Token = token
                 };

@@ -67,6 +67,9 @@
         [DataMember(Name = "graphic_full_path")]
         public string GraphicFullPath { get; set; }
 
+        //Used to remove planes from planelist
+        public int Generation { get; set; }
+
         public void UpdateProperties(
             string type, 
             Point position, 

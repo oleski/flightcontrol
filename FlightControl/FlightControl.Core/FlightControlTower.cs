@@ -23,14 +23,46 @@
         {
             var ticker = new Timer();
             ticker.Elapsed += UpdatePlanes;
-            ticker.Elapsed += WaypointPlanes;
             ticker.Interval = 2000; // in miliseconds
             ticker.Start();
         }
 
-        private void WaypointPlanes(object sender, EventArgs e)
+        private void SyncCurrentPlanes()
         {
-            foreach (var plane in _planes)
+            var newPlanes = _context.GetPlanes();
+            var oldPlanes = _planes.Where(p => !newPlanes.Select(x => x.Id).Contains(p.Id)).ToList();
+            foreach (var plane in oldPlanes)
+            {
+                plane.Generation++;
+                if (plane.Generation > 10)
+                    _planes.Remove(plane);
+            }
+            foreach (var plane in newPlanes)
+            {
+                var existingPlane = _planes.SingleOrDefault(x => x.Id == plane.Id);
+                if (existingPlane == null)
+                    _planes.Add(plane);
+                else
+                {
+                    existingPlane.UpdateProperties(
+                        plane.Type,
+                        plane.Position,
+                        plane.Rotation,
+                        plane.Id,
+                        plane.Name,
+                        plane.Graphic,
+                        plane.Speed,
+                        plane.Fuel,
+                        plane.Points,
+                        plane.Penalty);
+                }
+            }
+        }
+
+        private void WaypointPlanes()
+        {
+            var currentPlanes = _planes.ToList();
+            foreach (var plane in currentPlanes)
             {
                 var waypoint = _context.Runway;
                 plane.Waypoint = waypoint;
@@ -40,27 +72,8 @@
 
         private void UpdatePlanes(object sender, EventArgs e)
         {
-            var newPlanes = _context.GetPlanes();
-            foreach (var plane in newPlanes)
-            {
-                var existingPlane = _planes.SingleOrDefault(x => x.Id == plane.Id);
-                if (existingPlane == null)
-                    _planes.Add(plane);
-                else
-                {
-                    existingPlane.UpdateProperties(
-                        plane.Type, 
-                        plane.Position, 
-                        plane.Rotation, 
-                        plane.Id, 
-                        plane.Name, 
-                        plane.Graphic, 
-                        plane.Speed, 
-                        plane.Fuel, 
-                        plane.Points, 
-                        plane.Penalty);
-                }
-            }
+            SyncCurrentPlanes();
+            WaypointPlanes();
         }
     }
 }
