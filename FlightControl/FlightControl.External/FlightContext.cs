@@ -13,11 +13,14 @@
             _proxy = proxy;
             Token = _proxy.CreateNewSession().Token;
             Boundary = _proxy.GetFlightInfo(Token).Boundary;
+            Runway = _proxy.GetFlightInfo(Token).Runway;
         }
 
         public string Token { get; private set; }
 
         public Boundary Boundary { get; private set; }
+
+        public Point Runway { get; set; }
 
         public List<Plane> GetPlanes()
         {
@@ -26,7 +29,7 @@
 
         public void UpdatePlane(int id, Point waypoint)
         {
-            _proxy.UpdatePlane(Token);
+            _proxy.UpdatePlane(Token, id, waypoint);
         }
     }
 }

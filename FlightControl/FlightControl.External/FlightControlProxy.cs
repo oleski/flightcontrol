@@ -1,7 +1,8 @@
 ﻿namespace FlightControl.External
 {
     using System;
-
+    using System.Net;
+    using System.Runtime.Serialization.Json;
     using FlightControl.Model;
 
     public class FlightControlProxy
@@ -34,10 +35,23 @@
             return flightInfo;
         }
 
-        public void UpdatePlane(string token)
+        public void UpdatePlane(string token, int id, Point waypoint)
         {
-            var uri = new Uri(_baseUri, "/post");
-            throw new NotImplementedException();
+            using (var client = new WebClient())
+            {
+                client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                var data = new PlaneInstruction
+                {
+                    Directions = new Direction
+                    {
+                        PlaneId = id,
+                        Waypoint = waypoint
+                    },
+                    Token = token
+                };
+                
+                var result = client.UploadString(_baseUri + "post?token=" + token, "POST", JsonSerializer.ToJson(data));
+            }
         }
     }
 }

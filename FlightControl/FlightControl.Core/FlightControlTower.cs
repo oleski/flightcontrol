@@ -32,11 +32,7 @@
         {
             foreach (var plane in _planes)
             {
-                var waypoint = new Point
-                {
-                    X = 5,
-                    Y = 5
-                };
+                var waypoint = _context.Runway;
                 plane.Waypoint = waypoint;
                 _context.UpdatePlane(plane.Id, waypoint);
             }        

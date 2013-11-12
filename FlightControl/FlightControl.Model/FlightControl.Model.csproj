@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Boundary.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="FlightInfo.cs" />
     <Compile Include="Plane.cs" />
+    <Compile Include="PlaneInstruction.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionInfo.cs" />

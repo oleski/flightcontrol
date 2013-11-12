@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="FlightContext.cs" />
     <Compile Include="FlightControlProxy.cs" />
+    <Compile Include="JsonSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRequestExtensions.cs" />
   </ItemGroup>
