@@ -4,32 +4,47 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
-
-    using FlightControl.Model;
+    using External;
+    using Model;
 
     public class FlightControlTower
     {
-        private readonly Func<IList<Plane>> _getPlanes;
+        private readonly FlightContext _context;
 
         private readonly IList<Plane> _planes;
 
-        public FlightControlTower(Func<IList<Plane>> getPlanes)
+        public FlightControlTower(FlightContext context)
         {
-            _getPlanes = getPlanes;
-            _planes = _getPlanes.Invoke();
+            _context = context;
+            _planes = context.GetPlanes();
         }
 
         public void Run()
         {
             var ticker = new Timer();
             ticker.Elapsed += UpdatePlanes;
+            ticker.Elapsed += WaypointPlanes;
             ticker.Interval = 2000; // in miliseconds
             ticker.Start();
         }
 
+        private void WaypointPlanes(object sender, EventArgs e)
+        {
+            foreach (var plane in _planes)
+            {
+                var waypoint = new Point
+                {
+                    X = 5,
+                    Y = 5
+                };
+                plane.Waypoint = waypoint;
+                _context.UpdatePlane(plane.Id, waypoint);
+            }        
+        }
+
         private void UpdatePlanes(object sender, EventArgs e)
         {
-            var newPlanes = _getPlanes.Invoke();
+            var newPlanes = _context.GetPlanes();
             foreach (var plane in newPlanes)
             {
                 var existingPlane = _planes.SingleOrDefault(x => x.Id == plane.Id);

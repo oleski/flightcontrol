@@ -43,6 +43,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FlightControl.External\FlightControl.External.csproj">
+      <Project>{741CE25B-3447-4B7F-834F-269789A32B23}</Project>
+      <Name>FlightControl.External</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlightControl.Model\FlightControl.Model.csproj">
       <Project>{bb63f635-b334-449e-920f-68d1f9c4c41b}</Project>
       <Name>FlightControl.Model</Name>

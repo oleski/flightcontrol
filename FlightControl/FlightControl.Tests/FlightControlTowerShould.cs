@@ -16,7 +16,7 @@
         {
             var flightControlProxy = new FlightControlProxy(Settings.Default.BaseUrl);
             var flightContext = new FlightContext(flightControlProxy);
-            var flightControlTower = new FlightControlTower(flightContext.GetPlanes);
+            var flightControlTower = new FlightControlTower(flightContext);
             flightControlTower.Run();
 
             Thread.Sleep(TimeSpan.FromMinutes(5));
