@@ -26,6 +26,8 @@
             "graphic_full_path":"player1/plane2.png"
         }*/
 
+        public bool Landing { get; set; }
+
         [DataMember(Name = "position")]
         public Point Position { get; set; }
 

@@ -25,7 +25,7 @@
         {
             var ticker = new Timer();
             ticker.Elapsed += UpdatePlanes;
-            ticker.Interval = 200; // in miliseconds
+            ticker.Interval = 50; // in miliseconds
             ticker.Start();
         }
 
@@ -44,9 +44,7 @@
             var oldPlanes = _planes.Where(p => !newPlanes.Select(x => x.Id).Contains(p.Id)).ToList();
             foreach (var plane in oldPlanes)
             {
-                plane.Generation++;
-                if (plane.Generation > 10)
-                    _planes.Remove(plane);
+                _planes.Remove(plane);
             }
             foreach (var plane in newPlanes)
             {
@@ -76,10 +74,24 @@
         private void WaypointPlanes()
         {
             var currentPlanes = _planes.ToList();
+            var landingPlane = currentPlanes.SingleOrDefault(x => x.Landing) ?? currentPlanes.OrderBy(x => x.Fuel).FirstOrDefault();
+            if (landingPlane != null)
+            {
+                landingPlane.Landing = true;
+                SetNewWaypoints(landingPlane);
+                if (landingPlane.RemainingWaypoints.Any())
+                {
+                    landingPlane.Waypoint = landingPlane.RemainingWaypoints.Last();
+                }
+                _context.UpdatePlane(landingPlane.Id, landingPlane.Waypoint);
+            }
             foreach (var plane in currentPlanes)
             {
-                plane.Waypoint = plane.Position;
-                _context.UpdatePlane(plane.Id, plane.Waypoint);
+                if (!plane.Landing)
+                {
+                    plane.Waypoint = plane.Position;
+                    _context.UpdatePlane(plane.Id, plane.Waypoint);
+                }
                 // Waypoint update code.
                 /*  SetNewWaypoints(plane);
                 if (plane.RemainingWaypoints.Any())
