@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FlightControl.Algorithms")]
+[assembly: AssemblyTitle("FlightControl.Manager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FlightControl.Algorithms")]
+[assembly: AssemblyProduct("FlightControl.Manager")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b0eeb630-48c8-431b-9033-87734b89315b")]
+[assembly: Guid("7813db2d-7fa2-442d-8366-95f0ab739bc3")]
 
 // Version information for an assembly consists of the following four values:
 //

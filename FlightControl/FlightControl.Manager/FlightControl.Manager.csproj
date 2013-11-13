@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2552C5F5-3CA9-4E03-A519-2855699E8102}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{1BE27BA5-CC73-4440-AACB-086F25662B7B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FlightControl.Algorithms</RootNamespace>
-    <AssemblyName>FlightControl.Algorithms</AssemblyName>
+    <RootNamespace>FlightControl.Manager</RootNamespace>
+    <AssemblyName>FlightControl.Manager</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,12 +41,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlaneExtensions.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlightControl.Core\FlightControl.Core.csproj">
+      <Project>{f6587755-4afb-4db8-879e-7aed22346b60}</Project>
+      <Name>FlightControl.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlightControl.External\FlightControl.External.csproj">
+      <Project>{741ce25b-3447-4b7f-834f-269789a32b23}</Project>
+      <Name>FlightControl.External</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlightControl.Model\FlightControl.Model.csproj">
-      <Project>{BB63F635-B334-449E-920F-68D1F9C4C41B}</Project>
+      <Project>{bb63f635-b334-449e-920f-68d1f9c4c41b}</Project>
       <Name>FlightControl.Model</Name>
     </ProjectReference>
   </ItemGroup>

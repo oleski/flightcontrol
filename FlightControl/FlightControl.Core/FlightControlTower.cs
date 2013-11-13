@@ -11,12 +11,14 @@
     {
         private readonly FlightContext _context;
 
-        private readonly IList<Plane> _planes;
+        private readonly List<Plane> _planes;
 
         public FlightControlTower(FlightContext context)
         {
             _context = context;
             _planes = context.GetPlanes();
+            SetInitialWaypoints(_planes);
+
         }
 
         public void Run()
@@ -25,6 +27,15 @@
             ticker.Elapsed += UpdatePlanes;
             ticker.Interval = 2000; // in miliseconds
             ticker.Start();
+        }
+
+        private void UpdatePlanes(object sender, EventArgs e)
+        {
+            lock (_planes)
+            {
+                SyncCurrentPlanes();
+                WaypointPlanes();
+            }
         }
 
         private void SyncCurrentPlanes()
@@ -42,7 +53,7 @@
                 var existingPlane = _planes.SingleOrDefault(x => x.Id == plane.Id);
                 if (existingPlane == null)
                 {
-                    plane.RemainingWaypoints = getInitialPlaneWaypoints(plane);
+                    SetInitialPlaneWaypoints(plane);
                     _planes.Add(plane);
                 }
                 else
@@ -62,24 +73,49 @@
             }
         }
 
+        private void WaypointPlanes()
+        {
+            var currentPlanes = _planes.ToList();
+            foreach (var plane in currentPlanes)
+            {
+                // Waypoint update code.
+                SetNewWaypoints(plane);
+                if (plane.RemainingWaypoints.Any())
+                {
+                    plane.Waypoint = plane.RemainingWaypoints.Last();
+                }
+                _context.UpdatePlane(plane.Id, plane.Waypoint);
+            }
+        }
+
+        private void SetInitialWaypoints(List<Plane> planes)
+        {
+            planes.ForEach(SetInitialPlaneWaypoints);
+        }
+
         /*
          * This returns a list of waypoints, based on the plane's original position
          * 
          * It isn't really tested - just wanted to hack some kind of waypoint mechanism together. Seems to work for most planes.
          * It's a very wide curve at the moment - you probably want to make it a bit tighter.
          */
-        public List<Point> getInitialPlaneWaypoints(Plane plane)
+        private void SetInitialPlaneWaypoints(Plane plane)
         {
-            List<Point> waypoints = new List<Point>();
+            var waypoints = new List<Point>();
+            
             // First point is the runway
-            Point waypoint0 = _context.Runway;
-            bool runwayIsInTopHalf = (_context.Runway.Y -_context.Boundary.Min.Y > 500);
+            var waypoint0 = _context.Runway;
+            var runwayIsInTopHalf = (_context.Runway.Y -_context.Boundary.Min.Y > 500);
+            
             // Second point is 100 pixels back from the runway
-            Point waypoint1 = waypoint0 + (runwayIsInTopHalf ? new Point(0, 100) : new Point(0, -100));
+            var waypoint1 = waypoint0 + (runwayIsInTopHalf ? new Point(0, 100) : new Point(0, -100));
+            
             // Third point is 100 pixels back from the last point, and 150 pixels towards the side that the plane starts on
             Point waypoint2;
+            
             // Fourth point is 150 pixels to the side from the last point, and on the side that the plane started on
             Point waypoint3;
+            
             if (plane.Position.X > 500)
             {
                 waypoint2 = waypoint1 + (runwayIsInTopHalf ? new Point(150, 100) : new Point(150, -100));
@@ -90,22 +126,25 @@
                 waypoint2 = waypoint1 + (runwayIsInTopHalf ? new Point(-150, 100) : new Point(-150, -100));
                 waypoint3 = waypoint2 + (runwayIsInTopHalf ? new Point(-150, 0) : new Point(-150, 0));
             }
+            
             System.Diagnostics.Debug.WriteLine("Plane: " + plane.Id + ", waypoint0: " + waypoint0.X + "," + waypoint0.Y + ", waypoint1: " + waypoint1.X + "," + waypoint1.Y + ", waypoint2: " + waypoint2.X + "," + waypoint2.Y);
+            
             waypoints.Add(waypoint0);
             waypoints.Add(waypoint1);
             waypoints.Add(waypoint2);
-            return waypoints;
+
+            plane.RemainingWaypoints = waypoints;
         }
 
         // This method should probably belong to the plane or the Directions object
         /*
          * Returns true if it finds a waypoint, otherwise returns false
          */
-        private void updatePlaneWaypoints(Plane plane)
+        private void SetNewWaypoints(Plane plane)
         {
             if (plane.RemainingWaypoints.Any())
             {
-                Point lastWaypoint = plane.RemainingWaypoints.Last();
+                var lastWaypoint = plane.RemainingWaypoints.Last();
                 // Detection just uses a square box at the moment - a bit crude
                 if ((plane.Position.X - lastWaypoint.X < 30) && (plane.Position.Y - lastWaypoint.Y < 30))
                 {
@@ -113,27 +152,6 @@
                     plane.RemainingWaypoints.Remove(lastWaypoint);
                 }
             }
-        }
-
-        private void WaypointPlanes()
-        {
-            var currentPlanes = _planes.ToList();
-            foreach (var plane in currentPlanes)
-            {
-                // Waypoint update code.
-                updatePlaneWaypoints(plane);
-                if (plane.RemainingWaypoints.Any())
-                {
-                    plane.Waypoint = plane.RemainingWaypoints.Last();
-                }
-                _context.UpdatePlane(plane.Id, plane.Waypoint);
-            }        
-        }
-
-        private void UpdatePlanes(object sender, EventArgs e)
-        {
-            SyncCurrentPlanes();
-            WaypointPlanes();
         }
     }
 }

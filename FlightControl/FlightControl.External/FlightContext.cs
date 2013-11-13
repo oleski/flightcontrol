@@ -8,15 +8,29 @@
     {
         private readonly FlightControlProxy _proxy;
 
-        public FlightContext(FlightControlProxy proxy)
+        // Existing session
+        public FlightContext(FlightControlProxy proxy, SessionInfo session)
         {
             _proxy = proxy;
-            Token = _proxy.CreateNewSession().Token;
-            Boundary = _proxy.GetFlightInfo(Token).Boundary;
-            Runway = _proxy.GetFlightInfo(Token).Runway;
+            Session = session;
+            Initialize();
         }
 
-        public string Token { get; private set; }
+        // New sesssion
+        public FlightContext(FlightControlProxy proxy) : this(proxy, proxy.CreateNewSession())
+        {
+        }
+
+        private void Initialize()
+        {
+            var flightInfo = _proxy.GetFlightInfo(Session.Token);
+            Boundary = flightInfo.Boundary;
+            Runway = flightInfo.Runway;
+        }
+
+        
+
+        public SessionInfo Session { get; private set; }
 
         public Boundary Boundary { get; private set; }
 
@@ -24,12 +38,12 @@
 
         public List<Plane> GetPlanes()
         {
-            return _proxy.GetFlightInfo(Token).Planes;
+            return _proxy.GetFlightInfo(Session.Token).Planes;
         }
 
         public void UpdatePlane(int id, Point waypoint)
         {
-            _proxy.UpdatePlane(Token, id, waypoint);
+            _proxy.UpdatePlane(Session.Token, id, waypoint);
         }
     }
 }
