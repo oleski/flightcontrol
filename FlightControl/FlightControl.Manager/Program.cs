@@ -17,7 +17,7 @@ namespace FlightControl.Manager
         static void Main(string[] args)
         {
             // Set in case of existing session
-            const string Token = "";
+            const string Token = "10bbfceaff55";
 
             try
             {

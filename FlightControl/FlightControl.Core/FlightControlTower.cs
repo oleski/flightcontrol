@@ -73,8 +73,24 @@
 
         private void WaypointPlanes()
         {
-            var currentPlanes = _planes.ToList();
-            var landingPlane = currentPlanes.SingleOrDefault(x => x.Landing) ?? currentPlanes.OrderBy(x => x.Fuel).FirstOrDefault();
+            foreach (var plane in _planes)
+            {
+                if (CheckNearbyPlanes(plane))
+                {
+                    plane.Waypoint = plane.Position;
+                }
+                else
+                {
+                    SetNewWaypoints(plane);
+                    if (plane.RemainingWaypoints.Any())
+                    {
+                        plane.Waypoint = plane.RemainingWaypoints.Last();
+                    }
+                }
+                _context.UpdatePlane(plane.Id, plane.Waypoint);
+            }
+            /*var currentPlanes = _planes.ToList();
+           /* var landingPlane = currentPlanes.SingleOrDefault(x => x.Landing) ?? currentPlanes.OrderByDescending(x => x.Fuel).FirstOrDefault();
             if (landingPlane != null)
             {
                 landingPlane.Landing = true;
@@ -84,22 +100,48 @@
                     landingPlane.Waypoint = landingPlane.RemainingWaypoints.Last();
                 }
                 _context.UpdatePlane(landingPlane.Id, landingPlane.Waypoint);
-            }
+            }#1#
             foreach (var plane in currentPlanes)
             {
-                if (!plane.Landing)
+                /*if (!plane.Landing)
                 {
                     plane.Waypoint = plane.Position;
                     _context.UpdatePlane(plane.Id, plane.Waypoint);
-                }
+                }#1#
                 // Waypoint update code.
-                /*  SetNewWaypoints(plane);
+                SetNewWaypoints(plane);
                 if (plane.RemainingWaypoints.Any())
                 {
                     plane.Waypoint = plane.RemainingWaypoints.Last();
                 }
-                _context.UpdatePlane(plane.Id, plane.Waypoint);*/
+                _context.UpdatePlane(plane.Id, plane.Waypoint);
+            }*/
+        }
+
+        private bool CheckNearbyPlanes(Plane plane)
+        {
+            var position = plane.Position;
+            var shift = 100;
+            var point1 = new Point(position.X - shift, position.Y + shift);
+            var point2 = new Point(position.X + shift, position.Y + shift);
+            var point3 = new Point(position.X + shift, position.Y - shift);
+            var nearbyPlanes = false;
+            var otherPlanes = _planes.Where(e => e.Id != plane.Id);
+            foreach (var plane2 in otherPlanes)
+            {
+                if (plane2.Position.X > point1.X &&
+                    plane2.Position.X < point2.X &&
+                    plane2.Position.Y > point3.Y &&
+                    plane2.Position.Y < point2.Y)
+                {
+                    if (plane.Fuel > plane2.Fuel)
+                    {
+                        nearbyPlanes = true;
+                        break;
+                    }
+                }
             }
+            return nearbyPlanes;
         }
 
         private void SetInitialWaypoints(List<Plane> planes)
