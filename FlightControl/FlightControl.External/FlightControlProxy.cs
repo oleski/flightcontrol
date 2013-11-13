@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
-    using System.Runtime.Serialization.Json;
     using FlightControl.Model;
 
     public class FlightControlProxy

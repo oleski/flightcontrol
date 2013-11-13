@@ -13,7 +13,7 @@
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return RedirectToAction("Run", "Home");
         }
 
         public ActionResult Run()

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BaseUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://challenge.hacktivate.me:3000</Value>
+      <Value Profile="(Default)">http://challenge.hacktivate.me</Value>
     </Setting>
   </Settings>
 </SettingsFile>

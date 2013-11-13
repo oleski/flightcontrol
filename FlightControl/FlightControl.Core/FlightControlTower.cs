@@ -25,7 +25,7 @@
         {
             var ticker = new Timer();
             ticker.Elapsed += UpdatePlanes;
-            ticker.Interval = 2000; // in miliseconds
+            ticker.Interval = 200; // in miliseconds
             ticker.Start();
         }
 
@@ -78,13 +78,15 @@
             var currentPlanes = _planes.ToList();
             foreach (var plane in currentPlanes)
             {
+                plane.Waypoint = plane.Position;
+                _context.UpdatePlane(plane.Id, plane.Waypoint);
                 // Waypoint update code.
-                SetNewWaypoints(plane);
+                /*  SetNewWaypoints(plane);
                 if (plane.RemainingWaypoints.Any())
                 {
                     plane.Waypoint = plane.RemainingWaypoints.Last();
                 }
-                _context.UpdatePlane(plane.Id, plane.Waypoint);
+                _context.UpdatePlane(plane.Id, plane.Waypoint);*/
             }
         }
 

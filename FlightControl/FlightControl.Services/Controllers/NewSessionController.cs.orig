@@ -1,0 +1,24 @@
+﻿using System.Web.Http;
+
+namespace FlightControl.Services.Controllers
+{
+<<<<<<< HEAD
+    using Service;
+    using Service.Data;
+=======
+    using FlightControl.Services.Properties;
+    using FlightControl.Services.Service;
+    using FlightControl.Services.Service.Data;
+>>>>>>> ab7f544247b85dc598833037c974e744a5931c97
+
+    public class NewSessionController : ApiController
+    {
+        public SessionInfo Get()
+        {
+            var proxy = new FlightControlProxy(Settings.Default.BaseUrl);
+            var session = proxy.GetNewSession();
+
+            return session;
+        }
+    }
+}
